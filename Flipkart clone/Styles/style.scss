@@ -1,0 +1,27 @@
+@import 'variables.scss';
+@import 'breakpoints.scss';
+@import 'mixin.scss'; 
+@import 'body.scss';
+@import 'header.scss';
+@import 'item.scss';
+@import 'discount-banner.scss';
+@import 'mid-banner.scss';
+@import 'mid-banner-logo.scss';
+@import 'lower-banner.scss';
+@import 'footer.scss';
+
+
+
+
+
+
+.breaker {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+a {
+  width: 0.625rem;
+  height: 1.25rem;
+  display: inline-block;
+}

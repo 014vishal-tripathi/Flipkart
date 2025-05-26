@@ -1,0 +1,16 @@
+.discount-banner {
+  margin-left: 1.4rem;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @each $name, $width in $breakpoints {
+    @media (max-width: $width) {
+      margin-left: if($name == 'small', 0.5rem, 1rem);
+      margin: 0 auto;
+    }
+  }
+}

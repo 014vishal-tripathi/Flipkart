@@ -1,0 +1,25 @@
+// Define mixins
+@mixin button-styles($bg-color, $scale: 1) {
+  padding: calc(0.625rem * $scale) calc(1.125rem * $scale);
+  background-color: $bg-color;
+  color: $text-white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: calc(0.9rem * $scale);
+}
+
+@mixin grid-template($columns, $scale: 1) {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: calc(0.5rem * $scale);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}

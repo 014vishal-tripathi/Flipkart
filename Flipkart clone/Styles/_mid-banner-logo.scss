@@ -1,0 +1,23 @@
+.logo {
+  width: 25rem;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; // Center logo by default
+
+  @each $name, $width in $breakpoints {
+    @media (max-width: $width) {
+      @if $name == 'mobile' {
+        width: 25rem; // Specific width for 500px
+        max-width: 80vw;
+        margin: 0 auto; // Ensure centering
+      } @else if $name == 'small' {
+        width: 20rem; // Specific width for 400px
+        max-width: 80vw;
+        margin: 0 auto; // Ensure centering
+      } @else {
+        width: if($name == 'large', 20rem, if($name == 'medium', 18rem, if($name == 'tablet', 15rem, 12rem)));
+      }
+    }
+  }
+}

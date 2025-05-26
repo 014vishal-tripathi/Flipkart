@@ -1,0 +1,51 @@
+.item-list {
+  @include grid-template(repeat(9, 1fr));
+  background-color: $background-header;
+  justify-content: center;
+  place-content: center;
+  place-items: center;
+  margin: 0 auto;
+  width: 76.25rem;
+  max-width: 100%;
+  gap: 0.3125rem;
+  height: auto;
+  padding: 0.5rem;
+  box-sizing: border-box;
+
+  .items {
+    margin-top: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    img.item-img {
+      width: 64px;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  // Responsive adjustments for item-list
+  @each $name, $width in $breakpoints {
+    @media (max-width: $width) {
+      width: 95vw;
+      @if $name == 'large' {
+        @include grid-template(repeat(7, 1fr), 0.9);
+      } @else if $name == 'medium' {
+        @include grid-template(repeat(5, 1fr), 0.85);
+      } @else if $name == 'tablet' {
+        @include grid-template(repeat(3, 1fr), 0.8);
+      } @else if $name == 'mobile' or $name == 'small' {
+        @include grid-template(repeat(2, 1fr), 0.75);
+      }
+
+      .items {
+        img.item-img {
+          width: if($name == 'small', 48px, if($name == 'mobile', 56px, 60px));
+        }
+      }
+    }
+  }
+}

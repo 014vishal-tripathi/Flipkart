@@ -1,0 +1,128 @@
+header {
+  background-color: $background-header;
+  color: $text-white;
+  padding: 0.5rem 0;
+
+  .header_logo {
+    img {
+      max-width: 25%;
+      margin-left: 10%;
+      margin-top: 2%;
+      object-fit: contain;
+    }
+  }
+
+  .header_wrapper {
+    @include grid-template(repeat(3, 1fr));
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0.125rem;
+    box-sizing: border-box;
+  }
+
+  .header_search {
+    @include flex-row;
+
+    input {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 0.25rem;
+      background-color: $search-bg;
+      width: 100%;
+      max-width: 300px;
+      color: black;
+      box-sizing: border-box;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      @include button-styles($button-primary);
+    }
+  }
+
+  .header_nav {
+    ul {
+      @include flex-row;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      place-items: center;
+
+      li {
+        margin-right: 1.25rem;
+
+        button {
+          @include button-styles($button-secondary);
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments for header
+  @each $name, $width in $breakpoints {
+    @media (max-width: $width) {
+      .header_wrapper {
+        @if $name == 'large' {
+          max-width: 90vw;
+        } @else if $name == 'medium' {
+          @include grid-template(repeat(2, 1fr), 0.9);
+          max-width: 85vw;
+          justify-content: space-between;
+        } @else if $name == 'tablet' {
+          @include grid-template(1fr, 0.85);
+          padding: 0.5rem;
+        } @else if $name == 'mobile' or $name == 'small' {
+          @include grid-template(1fr, 0.8);
+          padding: 0.75rem;
+        }
+      }
+
+      .header_logo img {
+        max-width: if($name == 'small', 35vw, if($name == 'mobile', 40vw, if($name == 'tablet', 30vw, 20vw)));
+        margin-left: 5%;
+      }
+
+      .header_search {
+        @if $name == 'medium' or $name == 'tablet' or $name == 'mobile' {
+          @include flex-row;
+          flex-wrap: nowrap;
+          justify-content: center;
+        }
+        input {
+          padding: if($name == 'small', 0.3rem, 0.4rem);
+          max-width: if($name == 'small', 60vw, if($name == 'mobile', 70vw, 80vw));
+        }
+        button {
+          @include button-styles($button-primary, if($name == 'small', 0.7, 0.8));
+        }
+      }
+
+      .header_nav ul {
+        @if $name == 'medium' {
+          @include flex-row;
+          justify-content: flex-end;
+          flex-wrap: nowrap;
+        } @else if $name == 'tablet' or $name == 'mobile' {
+          @include flex-row;
+          justify-content: center;
+          flex-wrap: nowrap;
+        } @else if $name == 'small' {
+          @include grid-template(1fr, 0.8);
+          justify-items: center;
+        }
+        li {
+          margin-right: if($name == 'small', 0, 0.5rem);
+          margin-bottom: if($name == 'small', 0.5rem, 0);
+          button {
+            @include button-styles($button-secondary, if($name == 'small', 0.6, 0.7));
+          }
+        }
+      }
+    }
+  }
+}
